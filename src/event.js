@@ -570,32 +570,35 @@ jQuery.Event.prototype = {
 
 	preventDefault: function() {
 		var e = this.originalEvent;
+        try {
+            this.isDefaultPrevented = returnTrue;
 
-		this.isDefaultPrevented = returnTrue;
-
-		if ( e && !this.isSimulated ) {
-			e.preventDefault();
-		}
+            if ( e && !this.isSimulated ) {
+                e.preventDefault();
+            }
+        } catch (e) {}
 	},
 	stopPropagation: function() {
 		var e = this.originalEvent;
+        try {
+            this.isPropagationStopped = returnTrue;
 
-		this.isPropagationStopped = returnTrue;
-
-		if ( e && !this.isSimulated ) {
-			e.stopPropagation();
-		}
+            if ( e && !this.isSimulated ) {
+                    e.stopPropagation();
+            }
+        } catch (e) {}
 	},
 	stopImmediatePropagation: function() {
 		var e = this.originalEvent;
+        try {
+            this.isImmediatePropagationStopped = returnTrue;
 
-		this.isImmediatePropagationStopped = returnTrue;
+            if ( e && !this.isSimulated ) {
+                e.stopImmediatePropagation();
+            }
 
-		if ( e && !this.isSimulated ) {
-			e.stopImmediatePropagation();
-		}
-
-		this.stopPropagation();
+            this.stopPropagation();
+        } catch (e) {}
 	}
 };
 
